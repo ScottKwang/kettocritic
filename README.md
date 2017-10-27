@@ -1,7 +1,6 @@
 # kettocritic (Video Game Review Aggregator)
 
-Setup
------
+## Setup
 
 Run the following script:
 
@@ -9,20 +8,19 @@ Run the following script:
 source setup.sh
 ```
 
-Debugging an API
-----------------
+## Debugging an API Challenge
 
 https://sites.google.com/a/zanbato.com/zanbato-internal/interviewing/evaluation/10-factor-assessment
 1. Problem Solving
     1. resourcefulness
     2. google and debugging
 
-ORM libraries
+#### ORM libraries
 * Javascript - [Sequelize](http://docs.sequelizejs.com/)
 * Java - [OrmLite](http://ormlite.com/sqlite_java_android_orm.shtml)
 * Python - [Pewee](http://docs.peewee-orm.com/en/latest/)
 
-Bugs/Tests
+#### Bugs/Tests
 1. GET
     1. Missing properties
     2. Incorrect calculated properties (Game, Reviewer, 1 level deep)
@@ -34,67 +32,98 @@ Bugs/Tests
 2. POST
 
 
-Models:
--------
+### Models:
 
-Tag
+#### Tag
 - Title
-- Many-Many Reviewers
-- Many-Many Games
+- Reviewers *(M-M)*
+- Games *(M-M)*
 
-Game
+#### Game
 - Name
-- Console(s)
-- Many-Many Tags
+- Tags *(M-M)*
 
-Score
-- Type (enum)
-    - Letter (A-F) (stored as 5-1)
-    - Percentage (1-100)
-    - Stars (1-5, 1-10)
-    - Other (1-40, 1-50, etc)
-- Score
-    - Number
-- Dict maps Type to Max allowed value
-
-Team
+#### Team
 - Name
 - Website
 
-Reviewer
+#### Score
+- Type (enum)
+    - Letter (A-F)
+        - A=5, B=4, C=3, D=2, F=1
+    - Percentage
+        - 0-100
+    - Stars
+        - 0-5
+- Score (Number)
+- Dict maps Type to allowed values?
+
+#### Reviewer
 - Name
-- FK Team
-- Many-Many Tags
+- Team *(FK)*
+- Tags *(M-M)*
 
-Review
-- 1-1 Score
-- FK Game
-- FK Reviewer
-- Description
-- Date
+#### Review
+- Score *(1-1)*
+- Game *(FK)*
+- Reviewer *(FK)*
 - Title
+- Date
+- Description
 
-Views/Serializers:
-------------------
+### Views/Serializers:
 
-Game
-- Filters: Team, Tag, Aggregate score
-- Calculated Properties: Aggregate Score
+#### Game
+- Filters
+    - Reviewer
+    - Team (through Reviewer)
+    - Tag
+    - Aggregate Score
+- Sort Fields
+    - Aggregate Score (highest/lowest)
+    - Reviewer (name)
+    - Team (name)
+- Calculated Properties
+    - Aggregate Score
 
-Review
+#### Review
+- Filters
+    - Reviewer
+    - Team (through Reviewer)
+    - Game
+- Sort Fields
+    - Game (name)
+    - Reviewer (name)
+    - Team (name)
+    - Score (highest/lowest)
 
-Reviewer
-- Filters: Team, Tag, Aggregate score
-- Calculated Properties: Aggregate Score
+#### Reviewer
+- Filters
+    - Game (through Review)
+    - Review
+    - Team
+    - Tag
+    - Aggregate Score
+- Sort Fields
+    - Aggregate Score (highest/lowest)
+    - Reviews (highest/lowest)
+    - Game (name)
+    - Team (name)
+- Calculated Properties
+    - Aggregate Score
 
-Team
-- Filters: Aggregate score (of all reviewers)
-- Calculated Properties: Aggregate score (of all reviewers)
+#### Team
+- Filters
+    - Reviewers aggregate Score
+- Calculated Properties
+    - Reviewers aggregate Score
 
-Tag
+#### Tag
+- Filters
+    - Game
+    - Reviewer
+- Calculated Properties
+    - Aggregate Score (through Game Aggregate Score)
 
-Tests/Bugs:
-----------
+### Tests/Bugs:
 TODO
-
-
