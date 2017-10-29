@@ -74,56 +74,75 @@ https://sites.google.com/a/zanbato.com/zanbato-internal/interviewing/evaluation/
 ### Views/Serializers:
 
 #### Game
-- Filters
-    - Reviewer
-    - Team (through Reviewer)
-    - Tag
-    - Aggregate Score
-- Sort Fields
-    - Aggregate Score (highest/lowest)
-    - Reviewer (name)
-    - Team (name)
 - Calculated Properties
     - Aggregate Score
+        - Through Reviews
+- Filters
+    - Reviewer ID
+    - Team ID
+        - Through Reviewer
+    - Aggregate Score (calculated)
+- Sort Fields
+    - Aggregate Score (calculated)
+    - Reviewer Name
+        - Through Reviewer
+    - Team Name
+        - Through Reviewer-->Team
+
+#### Team
+- Calculated Properties
+    - Average Score
+        - Through Reviewers-->Reviews
+- Filters
+    - Average Score (calculated)
+- Sort Fields
+    - Average Score (calculated)
 
 #### Review
 - Filters
-    - Reviewer
-    - Team (through Reviewer)
+    - Reviewer ID
+    - Team ID
+        - Through Reviewer
     - Game
 - Sort Fields
-    - Game (name)
-    - Reviewer (name)
-    - Team (name)
-    - Score (highest/lowest)
+    - Score
+    - Game Name
+        - Through Game
+    - Reviewer Name
+        - Through Reviewer
+    - Team Name
+        - Through Reviewer-->Team
 
 #### Reviewer
+- Calculated Properties
+    - Average Score
+        - Through Reviews
 - Filters
-    - Game (through Review)
-    - Review
-    - Team
-    - Tag
+    - Game ID
+        - Through Review
+    - Team ID
     - Aggregate Score
 - Sort Fields
-    - Aggregate Score (highest/lowest)
-    - Reviews (highest/lowest)
-    - Game (name)
-    - Team (name)
-- Calculated Properties
-    - Aggregate Score
-
-#### Team
-- Filters
-    - Reviewers aggregate Score
-- Calculated Properties
-    - Reviewers aggregate Score
+    - Average Score (calculated)
+    - Team Name
+        - Through Team
+    - Game Name
+        - Through Review-->Game
 
 #### Tag
-- Filters
-    - Game
-    - Reviewer
 - Calculated Properties
-    - Aggregate Score (through Game Aggregate Score)
+    - Aggregate Score
+        - Through Game Aggregate Score (calculated)
+- Filters
+    - Game ID
+    - Reviewer ID
 
 ### Tests/Bugs:
-TODO
+
+Run the following script to run the test suite:
+
+```
+python test.py
+```
+
+### Interactive Shell
