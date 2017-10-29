@@ -102,3 +102,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# sqlite
+*.db
+
+# vim
+*.swp
