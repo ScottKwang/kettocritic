@@ -15,6 +15,14 @@ class BaseModel(Model):
 class Game(BaseModel):
     name = CharField(unique=True)
 
+    @property
+    def average_score(self):
+        reviews = self.reviews
+        if not reviews:
+            return 0
+        total_score = sum(review.score.normalized_score for review in reviews)
+        return total_score / len(reviews)
+
 
 class Tag(BaseModel):
     name = CharField(unique=True)
@@ -39,16 +47,23 @@ class Reviewer(BaseModel):
 
 
 class Score(BaseModel):
-    SCORE_TYPE_LETTER = 10
-    SCORE_TYPE_PERCENTAGE = 20
-    SCORE_TYPE_STARS = 30
+    SCORE_TYPE_LETTER = 10  # 1 - 5
+    SCORE_TYPE_PERCENTAGE = 20  # 0 - 100
+    SCORE_TYPE_STARS = 30  # 0 - 5
     SCORE_TYPE_CHOICES = (
         (SCORE_TYPE_LETTER, 'Letter'),
         (SCORE_TYPE_PERCENTAGE, 'Percentage'),
         (SCORE_TYPE_STARS, 'Stars'),
     )
-    score = IntegerField() 
+    score = IntegerField()
     score_type = IntegerField(choices=SCORE_TYPE_CHOICES)
+
+    @property
+    def normalized_score(self):
+        if self.score_type == self.SCORE_TYPE_LETTER or \
+                self.score_type == self.SCORE_TYPE_STARS:
+            return self.score * 20  # potential refactor into computed from constant range
+        return self.score
 
 
 class Review(BaseModel):

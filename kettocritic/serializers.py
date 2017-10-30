@@ -21,10 +21,10 @@ class ModelSerializer():
 
     def get_serialized_model(self, instance):
         serialized_data = {}
-        for field in self.fields:        
+        for field in self.fields:
             serialized_data[field] = self._get_serialized_field(instance, field)
         return serialized_data
-        
+
 
 class GameSerializer(ModelSerializer):
     fields = ['name']
@@ -39,4 +39,4 @@ class ReviewerSerializer(ModelSerializer):
 
 
 class ReviewSerializer(ModelSerializer):
-    fields = ['game', 'reviewer', 'score', 'title']
+    fields = ['game', 'reviewer', 'score', 'title', 'created_on', 'description']

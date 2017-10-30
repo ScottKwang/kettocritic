@@ -22,8 +22,8 @@ class FailingTests(unittest.TestCase):
 
     def test_review_view_get(self):
         """
-        `router.get_reviews()` is returning a list of reviews with missing 'create_on' and 'description' fields.
-        Update the endpoint so that it correctly includes the 'date' and 'description' fields.
+        `router.get_reviews()` is returning a list of reviews with missing 'created_on' and 'description' fields.
+        Update the endpoint so that it correctly includes the 'created_on' and 'description' fields.
         """
         self.assertEqual(router.get_reviews(sorts=['id']), [
             {'description': 'John Wall Takes an in-depth look at Assassins Creed Origins', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 1, 'title': "John Wall's Review of Assassins Creed Origins", 'score': 1, 'game': 1},
@@ -48,13 +48,18 @@ class FailingTests(unittest.TestCase):
 
     def test_review_view_get_with_filter(self):
         """
-        `router.get_reviews(filter={'average_score_gte': 70})` isn't correctly filtering the list of reviews to only
-        include reviews with an average score below 70.
-        Update the filtering correctly filters the list of reivews by average score.
+        `router.get_games(filter={'average_score__gte': 70})` isn't correctly filtering the list of games
+        to only include games with an average score of 70 or greater.
+        Update the filtering to correctly filter the list of games by average score.
         Easy Mode: Implement filtering after the objects have been serialized
-        Hard Mode: Implement filtering at the ORM level 
+        Hard Mode: Implement filtering at the ORM level
         """
-        self.assertEqual(router.get_reviews(filter={'average_score_gte': 70}), [{}])
+        self.assertEqual(router.get_games(filters={'average_score__gte': 70}), [
+            {'name': 'Assassins Creed Origins'},
+            {'name': 'Cuphead'},
+            {'name': 'Super Smash Bros. for Wii U'},
+            {'name': 'Super Meat Boy'},
+        ])
 
     def test_review_view_get_with_sort(self):
         """
@@ -63,7 +68,7 @@ class FailingTests(unittest.TestCase):
         Extra Credit: expand related fields so that we are able to see the related teams in the router output
         Note: Test should not fail if you complete the extra credit
         """
-        self.assertEqual(router.get_review(sort=['reviewer__team__name', 'id']), [{
+        self.assertEqual(router.get_reviews(sorts=['reviewer__team__name', 'id']), [
             {'description': 'John Wall Takes an in-depth look at Assassins Creed Origins', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 1, 'title': "John Wall's Review of Assassins Creed Origins", 'score': 1, 'game': 1},
             {'description': 'Bradley Beal Takes an in-depth look at Cities Skylines', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 2, 'title': "Bradley Beal's Review of Cities Skylines", 'score': 4, 'game': 2},
             {'description': 'Mike Scott Takes an in-depth look at Cuphead', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 3, 'title': "Mike Scott's Review of Cuphead", 'score': 7, 'game': 3},
@@ -82,7 +87,7 @@ class FailingTests(unittest.TestCase):
             {'description': 'LeBron James Takes an in-depth look at Destiny 2', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 8, 'title': "LeBron James's Review of Destiny 2", 'score': 12, 'game': 4},
             {'description': 'Derrick Rose Takes an in-depth look at Super Smash Bros. for Wii U', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 9, 'title': "Derrick Rose's Review of Super Smash Bros. for Wii U", 'score': 15, 'game': 5},
             {'description': 'Dwyane Wade Takes an in-depth look at Super Smash Bros. for Wii U', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 10, 'title': "Dwyane Wade's Review of Super Smash Bros. for Wii U", 'score': 18, 'game': 5}
-        }])
+        ])
 
 
 if __name__ == '__main__':
