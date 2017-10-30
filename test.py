@@ -19,54 +19,6 @@ class FailingTests(unittest.TestCase):
         """
         drop_tables()
 
-    """
-    def _create_object(self, model, **kwargs):
-        try:
-            with self.database.transaction():
-                object = model.create(**kwargs)
-        except IntegrityError:
-            object = model.get(**kwargs)
-        self.objects_to_destroy.append(object)
-        return object
-
-    def _create_game(self, name):
-        create_kwargs = {
-            'name': name,
-        }
-        return self._create_object(models.Game, **create_kwargs)
-
-    def _create_team(self, name, website):
-        create_kwargs = {
-            'name': name,
-            'website': website,
-        }
-        return self._create_object(models.Team, **create_kwargs)
-
-    def _create_reviewer(self, name, team):
-        create_kwargs = {
-            'name': name,
-            'team': team,
-        }
-        return self._create_object(models.Reviewer, **create_kwargs)
-
-    def _create_review(self, game, reviewer, score_type, score_value):
-        create_kwargs = {
-            'game': game,
-            'reviewer': reviewer,
-            'title': "{}'s Review of {}".format(reviewer.name, game.name),
-            'description': "{} gives his take on {}".format(reviewer.name, game.name),
-            'score': self._create_score(score_type, score_value),
-        }
-        return self._create_object(models.Review, **create_kwargs)
-
-    def _create_score(self, score_type, score_value):
-        create_kwargs = {
-            'score': score_value,
-            'score_type': score_type,
-        }
-        return self._create_object(models.Score, **create_kwargs)
-    """
-
     def test_reviewer_view_get(self):
         """
         `ReviewersView.get()` is returning a list of reviews with missing 'date' and 'description' fields.
