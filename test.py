@@ -66,4 +66,6 @@ class FailingTests(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    from subprocess import call
+    call(["rm", "my_database.db"])
     unittest.main()
