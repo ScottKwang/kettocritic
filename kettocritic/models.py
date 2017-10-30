@@ -21,8 +21,8 @@ class Tag(BaseModel):
 
 
 class GameToTag(BaseModel):
-    game = ForeignKeyField(Game)
-    tag = ForeignKeyField(Tag)
+    game = ForeignKeyField(Game, related_name='game_to_tags')
+    tag = ForeignKeyField(Tag, related_name='tag_to_games')
 
     class Meta:
         primary_key = CompositeKey('game', 'tag')
@@ -35,7 +35,7 @@ class Team(BaseModel):
 
 class Reviewer(BaseModel):
     name = CharField(unique=True)
-    team = ForeignKeyField(Team)
+    team = ForeignKeyField(Team, related_name='reviewers')
 
 
 class Score(BaseModel):
@@ -54,15 +54,15 @@ class Score(BaseModel):
 class Review(BaseModel):
     created_on = DateTimeField(default=datetime.datetime.now)
     description = TextField()
-    game = ForeignKeyField(Game)
-    reviewer = ForeignKeyField(Reviewer)
-    score = ForeignKeyField(Score)
+    game = ForeignKeyField(Game, related_name='reviews')
+    reviewer = ForeignKeyField(Reviewer, related_name='reviews')
+    score = ForeignKeyField(Score, related_name='review')
     title = CharField()
 
 
 class ReviewerToTag(BaseModel):
-    reviewer = ForeignKeyField(Reviewer)
-    tag = ForeignKeyField(Tag)
+    reviewer = ForeignKeyField(Reviewer, related_name='reviewer_to_tags')
+    tag = ForeignKeyField(Tag, related_name='tag_to_reviewers')
 
     class Meta:
         primary_key = CompositeKey('reviewer', 'tag')
