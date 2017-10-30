@@ -147,7 +147,7 @@ def create_data():
     _create_review(game=cities_skyline, reviewer=ign_bradley,
                    score_type=models.Score.SCORE_TYPE_LETTER, score=3)
     _create_review(game=cities_skyline, reviewer=mc_kevin,
-                   score_type=models.Score.SCORE_TYPE_PERCENTAGE, score=77)
+                   score_type=models.Score.SCORE_TYPE_PERCENTAGE, score=68)
     _create_review(game=cities_skyline, reviewer=pc_derrick,
                    score_type=models.Score.SCORE_TYPE_STARS, score=4)
 
