@@ -1,3 +1,4 @@
+import datetime
 from kettocritic.models import BaseModel
 
 class ModelSerializer():
@@ -14,6 +15,8 @@ class ModelSerializer():
         attr = getattr(instance, field, None)
         if isinstance(attr, BaseModel):
             return attr.id
+        if isinstance(attr, datetime.datetime):
+            return str(attr)
         return attr
 
     def get_serialized_model(self, instance):
@@ -36,4 +39,4 @@ class ReviewerSerializer(ModelSerializer):
 
 
 class ReviewSerializer(ModelSerializer):
-    fields = ['created_on', 'description', 'game', 'reviewer', 'score', 'title']
+    fields = ['game', 'reviewer', 'score', 'title']

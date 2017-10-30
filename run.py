@@ -6,8 +6,5 @@ from db_utils import create_tables, create_data, drop_tables
 
 
 if __name__ == '__main__':
-    try:
-        create_tables()
-        create_data()
-    except IntegrityError:
-        pass
+    create_tables()
+    create_data()
