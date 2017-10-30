@@ -23,15 +23,17 @@ class FailingTests(unittest.TestCase):
     def test_reviewer_view_get(self):
         """
         `router.get_reviews()` is returning a list of reviews with missing 'create_on' and 'description' fields.
-        Fix the `query` function so it correctly includes the 'date' and 'description' fields.
+        Update the endpoint so that it correctly includes the 'date' and 'description' fields.
         """
         pass
 
     def test_review_view_get_with_filter(self):
         """
-        `Review.get(filter='average_score_gte=70')` isn't correctly filtering the list of reviews to only
+        `router.get_reviews(filter='average_score_gte=70')` isn't correctly filtering the list of reviews to only
         include reviews with an average score below 70.
-        Fix the `query` function so it correctly filters the list of reivews by average score.
+        Update the filtering correctly filters the list of reivews by average score.
+        Easy Mode: Implement filtering after the objects have been serialized
+        Hard Mode: Implement filtering at the ORM level 
         """
         pass
 
