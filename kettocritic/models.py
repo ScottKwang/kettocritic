@@ -52,7 +52,7 @@ class Score(BaseModel):
 
 
 class Review(BaseModel):
-    created_on = DateTimeField(default=datetime.datetime.now)
+    created_on = DateTimeField(default=datetime.datetime.strptime('2017-10-29 21:15:16.529267', '%Y-%m-%d %H:%M:%S.%f'))
     description = TextField()
     game = ForeignKeyField(Game, related_name='reviews')
     reviewer = ForeignKeyField(Reviewer, related_name='reviews')

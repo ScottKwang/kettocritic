@@ -1,19 +1,23 @@
+import datetime
+from kettocritic.models import BaseModel
+
 class ModelSerializer():
     fields = []
 
     def _get_serialized_field(self, instance, field):
         # if get function found, return result of get function
         # otherwise try to return string of field?
-        try:
-            getter = 'get_%s' % field
-            return self.__getattribute__(getter)(instance)
-        except AttributeError:
-            pass
+        getter_str = 'get_%s' % field
+        getter = getattr(self, getter_str, None)
+        if getter:
+            return getter(instance)
 
-        try:
-            return getattr(instance, field)
-        except AttributeError:
-            return
+        attr = getattr(instance, field, None)
+        if isinstance(attr, BaseModel):
+            return attr.id
+        if isinstance(attr, datetime.datetime):
+            return str(attr)
+        return attr
 
     def get_serialized_model(self, instance):
         serialized_data = {}
@@ -35,4 +39,4 @@ class ReviewerSerializer(ModelSerializer):
 
 
 class ReviewSerializer(ModelSerializer):
-    fields = ['created_on', 'description', 'game', 'reviewer', 'score', 'title']
+    fields = ['game', 'reviewer', 'score', 'title']
