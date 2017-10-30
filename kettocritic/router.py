@@ -6,16 +6,16 @@ class Router(object):
     reviewers_view = views.ReviewerView()
     reviews_view = views.ReviewView()
 
-    def get_games(self, game_id=None):
-        return self.game_view.query(game_id)
+    def get_games(self, game_id=None, filters={}, sorts=[]):
+        return self.game_view.query(game_id, filters, sorts)
 
-    def get_teams(self, team_id=None):
-        return self.team_view.query(team_id)
+    def get_teams(self, team_id=None, filters={}, sorts=[]):
+        return self.team_view.query(team_id, filters, sorts)
 
-    def get_reviewers(self, reviewer_id=None):
-        return self.reviewers_view.query(reviewer_id)
+    def get_reviewers(self, reviewer_id=None, filters={}, sorts=[]):
+        return self.reviewers_view.query(reviewer_id, filters, sorts)
 
-    def get_reviews(self, review_id=None):
-        return self.reviews_view.query(review_id)
+    def get_reviews(self, review_id=None, filters={}, sorts=[]):
+        return self.reviews_view.query(review_id, filters, sorts)
 
 

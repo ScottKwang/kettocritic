@@ -1,3 +1,5 @@
+from kettocritic.models import BaseModel
+
 class ModelSerializer():
     fields = []
 
@@ -9,7 +11,10 @@ class ModelSerializer():
         if getter:
             return getter(instance)
 
-        return getattr(instance, field, None)
+        attr = getattr(instance, field, None)
+        if isinstance(attr, BaseModel):
+            return attr.id
+        return attr
 
     def get_serialized_model(self, instance):
         serialized_data = {}
