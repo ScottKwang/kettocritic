@@ -25,7 +25,7 @@ class FailingTests(unittest.TestCase):
         `router.get_reviews()` is returning a list of reviews with missing 'create_on' and 'description' fields.
         Update the endpoint so that it correctly includes the 'date' and 'description' fields.
         """
-        self.assertEqual(router.get_reviews(), [
+        self.assertEqual(router.get_reviews(sorts=['id']), [
             {'description': 'John Wall Takes an in-depth look at Assassins Creed Origins', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 1, 'title': "John Wall's Review of Assassins Creed Origins", 'score': 1, 'game': 1},
             {'description': 'Stephen Curry Takes an in-depth look at Assassins Creed Origins', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 4, 'title': "Stephen Curry's Review of Assassins Creed Origins", 'score': 2, 'game': 1},
             {'description': 'LeBron James Takes an in-depth look at Assassins Creed Origins', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 8, 'title': "LeBron James's Review of Assassins Creed Origins", 'score': 3, 'game': 1},
