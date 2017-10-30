@@ -48,8 +48,8 @@ class ModelView():
         else:
             query = self._filter_query(query, filters)
             query = self._sort_query(query, sorts)
-        
-        return self._serialize_query(object)
+
+        return self._serialize_query(query)
 
 
 class GameView(ModelView):

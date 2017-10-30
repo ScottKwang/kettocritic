@@ -11,7 +11,7 @@ class ModelSerializer():
             pass
 
         try:
-            return instance.__getattribute__(field)
+            return getattr(instance, field)
         except AttributeError:
             return
 
