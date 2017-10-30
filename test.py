@@ -1,4 +1,5 @@
 import unittest
+from kettocritic import router
 from peewee import IntegrityError
 
 from db_utils import create_tables, create_data, drop_tables
@@ -21,15 +22,8 @@ class FailingTests(unittest.TestCase):
 
     def test_reviewer_view_get(self):
         """
-        `ReviewersView.get()` is returning a list of reviews with missing 'date' and 'description' fields.
-        Fix the `get` function so it correctly includes the 'date' and 'description' fields.
-        """
-        pass
-
-    def test_game_view_get_with_sort(self):
-        """
-        `GameView.get(sort='team')` isn't correctly sorting the list of games by team name.
-        Fix the `get` function so it correctly sorts the list of games by related team name.
+        `router.get_reviews()` is returning a list of reviews with missing 'create_on' and 'description' fields.
+        Fix the `query` function so it correctly includes the 'date' and 'description' fields.
         """
         pass
 
@@ -37,7 +31,14 @@ class FailingTests(unittest.TestCase):
         """
         `Review.get(filter='average_score_gte=70')` isn't correctly filtering the list of reviews to only
         include reviews with an average score below 70.
-        Fix the `get` function so it correctly filters the list of reivews by average score.
+        Fix the `query` function so it correctly filters the list of reivews by average score.
+        """
+        pass
+
+    def test_game_view_get_with_sort(self):
+        """
+        `GameView.get(sort='team__name')` isn't correctly sorting the list of games by team name.
+        Modify the `ModelView` class such that queries can be sorted by related properties.
         """
         pass
 
