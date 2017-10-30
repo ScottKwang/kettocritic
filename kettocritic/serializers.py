@@ -4,16 +4,12 @@ class ModelSerializer():
     def _get_serialized_field(self, instance, field):
         # if get function found, return result of get function
         # otherwise try to return string of field?
-        try:
-            getter = 'get_%s' % field
-            return self.__getattribute__(getter)(instance)
-        except AttributeError:
-            pass
+        getter_str = 'get_%s' % field
+        getter = getattr(self, getter_str, None)
+        if getter:
+            return getter(instance)
 
-        try:
-            return getattr(instance, field)
-        except AttributeError:
-            return
+        return getattr(instance, field, None)
 
     def get_serialized_model(self, instance):
         serialized_data = {}
