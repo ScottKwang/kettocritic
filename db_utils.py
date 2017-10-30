@@ -46,6 +46,16 @@ def drop_tables():
 
 
 def create_data():
+    def _create_review(game, reviewer, score_type, score):
+        create_kwargs = {
+            'game': game,
+            'reviewer': reviewer,
+            'score': models.Score.create(score_type=score_type, score=score),
+            'title': "{}'s Review of {}".format(reviewer.name, game.name),
+            'description': "{} Takes an in-depth look at {}".format(reviewer.name, game.name),
+        }
+        return models.Review.create(**create_kwargs)
+
     # Create Tags
     tag_legacy = models.Tag.create(name="Legacy")
     tag_pc = models.Tag.create(name="PC")
@@ -124,8 +134,47 @@ def create_data():
     pc_dwyane = models.Reviewer.create(name="Dwyane Wade", team=pcgamer)
 
     # Create ReviewerToTags
+    # TODO
 
-    # Create Scores
+    # Create Reviews/Scores
+    _create_review(game=ac_origins, reviewer=ign_john,
+                   score_type=models.Score.SCORE_TYPE_LETTER, score=5)
+    _create_review(game=ac_origins, reviewer=mc_curry,
+                   score_type=models.Score.SCORE_TYPE_PERCENTAGE, score=91)
+    _create_review(game=ac_origins, reviewer=pc_lebron,
+                   score_type=models.Score.SCORE_TYPE_STARS, score=4)
 
-    # Create Reviews
+    _create_review(game=cities_skyline, reviewer=ign_bradley,
+                   score_type=models.Score.SCORE_TYPE_LETTER, score=3)
+    _create_review(game=cities_skyline, reviewer=mc_kevin,
+                   score_type=models.Score.SCORE_TYPE_PERCENTAGE, score=77)
+    _create_review(game=cities_skyline, reviewer=pc_derrick,
+                   score_type=models.Score.SCORE_TYPE_STARS, score=4)
 
+    _create_review(game=cuphead, reviewer=ign_mike,
+                   score_type=models.Score.SCORE_TYPE_LETTER, score=4)
+    _create_review(game=cuphead, reviewer=mc_klay,
+                   score_type=models.Score.SCORE_TYPE_PERCENTAGE, score=85)
+    _create_review(game=cuphead, reviewer=pc_dwyane,
+                   score_type=models.Score.SCORE_TYPE_STARS, score=3)
+
+    _create_review(game=destiny2, reviewer=ign_john,
+                   score_type=models.Score.SCORE_TYPE_LETTER, score=3)
+    _create_review(game=destiny2, reviewer=mc_draymond,
+                   score_type=models.Score.SCORE_TYPE_PERCENTAGE, score=61)
+    _create_review(game=destiny2, reviewer=pc_lebron,
+                   score_type=models.Score.SCORE_TYPE_STARS, score=2)
+
+    _create_review(game=smash4, reviewer=ign_bradley,
+                   score_type=models.Score.SCORE_TYPE_LETTER, score=5)
+    _create_review(game=smash4, reviewer=mc_curry,
+                   score_type=models.Score.SCORE_TYPE_PERCENTAGE, score=97)
+    _create_review(game=smash4, reviewer=pc_derrick,
+                   score_type=models.Score.SCORE_TYPE_STARS, score=5)
+
+    _create_review(game=supermeatboy, reviewer=ign_mike,
+                   score_type=models.Score.SCORE_TYPE_LETTER, score=4)
+    _create_review(game=smash4, reviewer=mc_kevin,
+                   score_type=models.Score.SCORE_TYPE_PERCENTAGE, score=88)
+    _create_review(game=smash4, reviewer=pc_dwyane,
+                   score_type=models.Score.SCORE_TYPE_STARS, score=4)
