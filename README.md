@@ -146,3 +146,9 @@ python test.py
 ```
 
 ### Interactive Shell
+
+Run the interactive shell with the following arugments to play around:
+
+```
+python -i run.py
+``` 
