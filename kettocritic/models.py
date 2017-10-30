@@ -4,6 +4,10 @@ from peewee import *
 
 
 class BaseModel(Model):
+
+    def __str__(self):
+        return str(self.id)
+
     class Meta:
         database = db
 
