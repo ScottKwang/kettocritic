@@ -46,15 +46,20 @@ class FailingTests(unittest.TestCase):
             {'description': 'Dwyane Wade Takes an in-depth look at Super Smash Bros. for Wii U', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 10, 'title': "Dwyane Wade's Review of Super Smash Bros. for Wii U", 'score': 18, 'game': 5}
         ])
 
-    def test_review_view_get_with_filter(self):
+    def test_game_view_get_with_filter(self):
         """
-        `router.get_reviews(filter={'average_score_gte': 70})` isn't correctly filtering the list of reviews to only
-        include reviews with an average score below 70.
-        Update the filtering correctly filters the list of reivews by average score.
+        `router.get_games(filter={'average_score_gte': 70})` isn't correctly filtering the list of games
+        to only include games with an average score of 70 or greater.
+        Update the filtering to correctly filter the list of games by average score.
         Easy Mode: Implement filtering after the objects have been serialized
         Hard Mode: Implement filtering at the ORM level 
         """
-        self.assertEqual(router.get_reviews(filter={'average_score_gte': 70}), [{}])
+        self.assertEqual(router.get_reviews(filters={'average_score_gte': 70}), [
+            {'name': 'Assassins Creed Origins'},
+            {'name': 'Cuphead'},
+            {'name': 'Super Smash Bros. for Wii U'},
+            {'name': 'Super Meat Boy'},
+        ])
 
     def test_game_view_get_with_sort(self):
         """
