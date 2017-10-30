@@ -1,5 +1,7 @@
 import collections
+
 from kettocritic import models, serializers
+
 
 class ModelView():
     model = None
@@ -42,12 +44,12 @@ class ModelView():
         query = self.model.select()
 
         if id:
-            object = query.where(self.model.id == id).first()
-            return self._serialize_query(object)
+            query = query.where(self.model.id == id).first()
+        else:
+            query = self._filter_query(query, filters)
+            query = self._sort_query(query, sorts)
         
-        filtered_query = self._filter_query(query, filters)
-        sorted_query = self._sort_query(filtered_query, sorts)
-        return self._serialize_query(sorted_query)
+        return self._serialize_query(object)
 
 
 class GameView(ModelView):
