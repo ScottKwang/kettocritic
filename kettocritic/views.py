@@ -34,7 +34,7 @@ class ModelView():
                 instance._sort_value = instance
                 for cur_field in field_chain:
                     instance._sort_value = getattr(instance._sort_value, cur_field)
-                if isinstance(instance._sort_value, basestring):
+                if isinstance(instance._sort_value, str):
                     instance._sort_value = instance._sort_value.lower()
 
             result.sort(key=lambda elem: elem._sort_value)
