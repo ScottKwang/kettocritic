@@ -46,7 +46,7 @@ class FailingTests(unittest.TestCase):
             {'description': 'Dwyane Wade Takes an in-depth look at Super Smash Bros. for Wii U', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 10, 'title': "Dwyane Wade's Review of Super Smash Bros. for Wii U", 'score': 18, 'game': 5}
         ])
 
-    def test_review_view_get_with_filter(self):
+    def test_game_view_get_with_filter(self):
         """
         `router.get_games(filter={'average_score__gte': 70})` isn't correctly filtering the list of games
         to only include games with an average score of 70 or greater.
