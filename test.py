@@ -63,12 +63,12 @@ class FailingTests(unittest.TestCase):
 
     def test_review_view_get_with_sort(self):
         """
-        `router.get_review(sorts=['reviewer__team__name', 'id'])` isn't correctly sorting the list of reviews by reviewer team name.
+        `router.get_reviews(sorts=['reviewer__team__name', 'id'])` isn't correctly sorting the list of reviews by reviewer team name.
         Modify the `ModelView` class such that queries can be sorted by related properties.
         Extra Credit: expand related fields so that we are able to see the related teams in the router output
         Note: Test should not fail if you complete the extra credit
         """
-        self.assertEqual(router.get_review(sorts=['reviewer__team__name', 'id']), [{
+        self.assertEqual(router.get_reviews(sorts=['reviewer__team__name', 'id']), [{
             {'description': 'John Wall Takes an in-depth look at Assassins Creed Origins', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 1, 'title': "John Wall's Review of Assassins Creed Origins", 'score': 1, 'game': 1},
             {'description': 'Bradley Beal Takes an in-depth look at Cities Skylines', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 2, 'title': "Bradley Beal's Review of Cities Skylines", 'score': 4, 'game': 2},
             {'description': 'Mike Scott Takes an in-depth look at Cuphead', 'created_on': '2017-10-29 21:15:16.529267', 'reviewer': 3, 'title': "Mike Scott's Review of Cuphead", 'score': 7, 'game': 3},
