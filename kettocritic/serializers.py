@@ -31,7 +31,7 @@ class GameSerializer(ModelSerializer):
 
 
 class TeamSerializer(ModelSerializer):
-    fields = ['id', 'name', 'website', 'num_reviews', 'num_reviewers']
+    fields = ['id', 'num_reviews', 'num_reviewers']
 
     def get_num_reviews(self, instance):
         return sum(reviewer.reviews.count() for reviewer in instance.reviewers)
