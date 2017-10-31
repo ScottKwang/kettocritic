@@ -63,7 +63,7 @@ class FailingTests(unittest.TestCase):
 
     def test_review_view_get_with_sort(self):
         """
-        `GameView.get(sort='team__name')` isn't correctly sorting the list of reviews by reviewer team name.
+        `router.get_reviews(sorts=['reviewer__team__name', 'id'])` isn't correctly sorting the list of reviews by reviewer team name.
         Modify the `ModelView` class such that queries can be sorted by related properties.
         Extra Credit: expand related fields so that we are able to see the related teams in the router output
         Note: Test should not fail if you complete the extra credit
