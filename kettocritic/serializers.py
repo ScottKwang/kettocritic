@@ -42,4 +42,4 @@ class ReviewerSerializer(ModelSerializer):
 
 
 class ReviewSerializer(ModelSerializer):
-    fields = ['id', 'game', 'reviewer', 'score', 'title']
+    fields = ['id', 'description', 'created_on', 'game', 'reviewer', 'score', 'title']
