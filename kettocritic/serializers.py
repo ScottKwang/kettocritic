@@ -21,10 +21,10 @@ class ModelSerializer():
 
     def get_serialized_model(self, instance):
         serialized_data = {}
-        for field in self.fields:        
+        for field in self.fields:
             serialized_data[field] = self._get_serialized_field(instance, field)
         return serialized_data
-        
+
 
 class GameSerializer(ModelSerializer):
     fields = ['name']

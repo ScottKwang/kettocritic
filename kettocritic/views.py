@@ -30,7 +30,7 @@ class ModelView():
             return None
         if not query:
             return []
-        
+
         serializer = self.serializer_class()
         if isinstance(query, collections.Iterable):
             return list(map(serializer.get_serialized_model, query))

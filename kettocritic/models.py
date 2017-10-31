@@ -39,15 +39,15 @@ class Reviewer(BaseModel):
 
 
 class Score(BaseModel):
-    SCORE_TYPE_LETTER = 10
-    SCORE_TYPE_PERCENTAGE = 20
-    SCORE_TYPE_STARS = 30
+    SCORE_TYPE_LETTER = 10  # 1 - 5
+    SCORE_TYPE_PERCENTAGE = 20  # 0 - 100
+    SCORE_TYPE_STARS = 30  # 0 - 5
     SCORE_TYPE_CHOICES = (
         (SCORE_TYPE_LETTER, 'Letter'),
         (SCORE_TYPE_PERCENTAGE, 'Percentage'),
         (SCORE_TYPE_STARS, 'Stars'),
     )
-    score = IntegerField() 
+    score = IntegerField()
     score_type = IntegerField(choices=SCORE_TYPE_CHOICES)
 
 
