@@ -27,16 +27,19 @@ class ModelSerializer():
 
 
 class GameSerializer(ModelSerializer):
-    fields = ['name']
+    fields = ['id', 'name']
 
 
 class TeamSerializer(ModelSerializer):
-    fields = ['name', 'website']
+    fields = ['id', 'num_reviews', 'num_reviewers']
+
+    def get_num_reviews(self, instance):
+        return sum(reviewer.reviews.count() for reviewer in instance.reviewers)
 
 
 class ReviewerSerializer(ModelSerializer):
-    fields = ['name', 'team']
+    fields = ['id', 'name', 'team']
 
 
 class ReviewSerializer(ModelSerializer):
-    fields = ['game', 'reviewer', 'score', 'title']
+    fields = ['id', 'description', 'created_on', 'game', 'reviewer', 'score', 'title']

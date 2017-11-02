@@ -32,6 +32,10 @@ class Team(BaseModel):
     name = CharField(unique=True)
     website = CharField(unique=True)
 
+    @property
+    def num_reviewers(self):
+        return self.reviewers.count()
+
 
 class Reviewer(BaseModel):
     name = CharField(unique=True)
@@ -39,7 +43,7 @@ class Reviewer(BaseModel):
 
 
 class Score(BaseModel):
-    SCORE_TYPE_LETTER = 10  # 1 - 5
+    SCORE_TYPE_LETTER = 10  # 0 - 5
     SCORE_TYPE_PERCENTAGE = 20  # 0 - 100
     SCORE_TYPE_STARS = 30  # 0 - 5
     SCORE_TYPE_CHOICES = (
