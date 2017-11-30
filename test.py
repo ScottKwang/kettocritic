@@ -43,6 +43,8 @@ class FailingTests(unittest.TestCase):
 
         Instead, we want to compare scores across different `score_type`s by normalizing the `score`s to something more
         easily comparable. Add a `normalized_score` field that returns a score value from 0-100 and remove the raw `score` field.
+
+        `SCORE_TYPE_LETTER` and `SCORE_TYPE_STARS` should multiply the raw score by 20 to produce the normalized score.
         """
         self.assertEqual(router.get_reviews(sorts=['id']), [
             {'game': 1, 'id': 1, 'reviewer': 1, 'normalized_score': 100, 'created_on': '2017-10-29 21:15:16.529267', 'title': "John Wall's Review of Assassins Creed Origins"},
