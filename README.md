@@ -6,6 +6,7 @@ Run the following script:
 
 ```
 source setup.sh
+source bin/activate
 ```
 
 ## Debugging an API Challenge
