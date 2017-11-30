@@ -6,7 +6,7 @@ class ModelSerializer():
 
     def _get_serialized_field(self, instance, field):
         # if get function found, return result of get function
-        # otherwise try to return string of field?
+        # otherwise try to return string of field
         getter_str = 'get_%s' % field
         getter = getattr(self, getter_str, None)
         if getter:
@@ -27,7 +27,11 @@ class ModelSerializer():
 
 
 class GameSerializer(ModelSerializer):
-    fields = ['id', 'name']
+    fields = ['id', 'name', 'average_score']
+
+    def get_average_score(self, instance):
+        # TODO
+        return 0
 
 
 class TeamSerializer(ModelSerializer):
@@ -36,10 +40,17 @@ class TeamSerializer(ModelSerializer):
     def get_num_reviews(self, instance):
         return sum(reviewer.reviews.count() for reviewer in instance.reviewers)
 
+    def get_num_reviewers(self, instance):
+        return instance.reviewers.count()
+
 
 class ReviewerSerializer(ModelSerializer):
     fields = ['id', 'name', 'team']
 
 
 class ReviewSerializer(ModelSerializer):
-    fields = ['id', 'description', 'created_on', 'game', 'reviewer', 'score', 'title']
+    fields = ['id', 'created_on', 'game', 'reviewer', 'title']
+
+    def get_normalized_score(self):
+        # TODO
+        return 0
